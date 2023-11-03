@@ -79,7 +79,7 @@ const App = () => {
       </div>
       <div
         style={{
-          flex: 8,
+          flex: 6,
           padding: "20px",
           display: "flex",
         }}

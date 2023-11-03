@@ -1,10 +1,28 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 
 const Container = ({ clickedindex, type }) => {
   const [clicked, setClicked] = useState(clickedindex);
   const [boldIndex, setBoldIndex] = useState(null);
+
+  const handleItemClick = async (index) => {
+    try {
+      setBoldIndex(index);
+
+      const response = await axios.post("http://34.64.167.142:5000/task", {
+        // 여기에 보낼 데이터를 추가합니다
+        text: demoData[clicked - 1].content[index],
+        user_id: 3,
+      });
+
+      console.log("Response from server:", response.data);
+    } catch (error) {
+      console.error("Error sending POST request:", error);
+    }
+  };
+
   let types;
   switch (type) {
     case "CONTAINER":
@@ -23,16 +41,26 @@ const Container = ({ clickedindex, type }) => {
 
   const demoData = [
     {
-      title: "카드1",
-      content: ["항목1 설명...", "항목2 설명...", "항목3 설명..."],
+      title: "강운영",
+      content: [
+        "파이프 용접",
+        "로딩 및 언로딩 시간 기록",
+        "모든 화물에 대한 출발 지점 설정",
+      ],
     },
     {
-      title: "카드2",
-      content: ["항목1 설명...", "항목2 설명...", "항목3 설명..."],
+      title: "김영희",
+      content: [
+        "로딩 또는 언로딩 작업 시간 기록",
+        "로딩 또는 언로딩 시간 기록",
+      ],
     },
     {
-      title: "카드3",
-      content: ["항목1 설명...", "항목2 설명...", "항목3 설명..."],
+      title: "김철수",
+      content: [
+        "화재 소화기와 응급 상황 대비 교육 수강",
+        "화물의 무게, 크기 및 특성 확인",
+      ],
     },
   ];
   const first = () => {
@@ -63,7 +91,9 @@ const Container = ({ clickedindex, type }) => {
               <h3>{card.title}</h3>
               <ul>
                 {card.content.map((item, idx) => (
-                  <li key={idx}>{item}</li>
+                  <li key={idx}>
+                    {item.length > 12 ? item.substring(0, 12) + "..." : item}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -106,7 +136,7 @@ const Container = ({ clickedindex, type }) => {
                   alignItems: "center",
                   fontWeight: boldIndex === index ? "bold" : "normal",
                 }}
-                onClick={() => setBoldIndex(index)}
+                onClick={() => handleItemClick(index)}
               >
                 <div
                   style={{
