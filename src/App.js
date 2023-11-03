@@ -6,7 +6,7 @@ const App = () => {
   const [currentComponent, setCurrentComponent] = useState(null);
   const [clicked, setClicked] = useState(null);
 
-  const workers = [{ name: "A" }, { name: "B" }];
+  const workers = [{ name: "강운영" }, { name: "김영희" }, { name: "김철수" }];
   let displayedComponent;
   if (currentComponent) {
     displayedComponent = (
