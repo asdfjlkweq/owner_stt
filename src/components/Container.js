@@ -14,10 +14,15 @@ const Container = ({ clickedindex, type }) => {
       const response = await axios.post("http://34.64.167.142:5000/task", {
         // 여기에 보낼 데이터를 추가합니다
         text: demoData[clicked - 1].content[index],
-        user_id: 3,
+        user_id: 1,
       });
-
       console.log("Response from server:", response.data);
+
+      const response2 = await axios.post("http://34.64.167.142:5000/status", {
+        // 여기에 보낼 데이터를 추가합니다
+        boolean: false,
+        task_id: response.data.id,
+      });
     } catch (error) {
       console.error("Error sending POST request:", error);
     }
