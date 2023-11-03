@@ -9,7 +9,9 @@ const App = () => {
   const workers = [{ name: "A" }, { name: "B" }];
   let displayedComponent;
   if (currentComponent) {
-    displayedComponent = <Container clickedindex={clicked} />;
+    displayedComponent = (
+      <Container clickedindex={clicked} type={currentComponent} />
+    );
   } else {
     displayedComponent = <Home />;
   }

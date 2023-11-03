@@ -2,9 +2,20 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Container = ({ clickedindex }) => {
+const Container = ({ clickedindex, type }) => {
   const [clicked, setClicked] = useState(clickedindex);
   const [boldIndex, setBoldIndex] = useState(null);
+  let types;
+  switch (type) {
+    case "CONTAINER":
+      types = "컨테이너 터미널";
+      break;
+    case "TAX":
+      types = "관세 및 통관";
+      break;
+    default:
+      types = "화물 검사 지점";
+  }
 
   useEffect(() => {
     setClicked(clickedindex);
@@ -66,7 +77,7 @@ const Container = ({ clickedindex }) => {
     return (
       <div style={{ flex: 1 }}>
         <h1 onClick={() => setClicked(null)}>
-          컨테이너 터미널 _ {demoData[clicked - 1].title}
+          {types} _ {demoData[clicked - 1].title}
         </h1>
         <div
           style={{
